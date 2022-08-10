@@ -13,9 +13,14 @@ final class WeatherTableCell: UITableViewCell {
     @IBOutlet private weak var temperatureLabel: UILabel!
     @IBOutlet private weak var weatherImageView: UIImageView!
     
-    func configure(day: String, tempMin: Int, tempMax: Int, image: UIImage) {
+    private let provider = ServiceProvider()
+    
+    func configure(day: String, tempMin: Int, tempMax: Int, imageName: String) {
         self.dayLabel.text = day
         self.temperatureLabel.text = "\(tempMax)º \\ \(tempMin)º"
-        self.weatherImageView.image = image
+        provider.loadImage(imageName)
+            .done { data in
+                self.weatherImageView.image = UIImage(data: data)
+            }.cauterize()
     }
 }

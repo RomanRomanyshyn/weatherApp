@@ -8,6 +8,7 @@
 import UIKit
 import CoreLocation
 import PromiseKit
+import SkeletonView
 
 final class HomePresenter: NSObject, PresenterProtocol {
     
@@ -51,14 +52,21 @@ final class HomePresenter: NSObject, PresenterProtocol {
         view?.tableView.registerXibCell(Constants.tableCellType)
         view?.tableView.delegate = self
         view?.tableView.dataSource = self
+        
+        view?.tableView.isSkeletonable = true
     }
     
     private func configureCollectionView() {
         view?.collectionView.registerXibCell(Constants.collectionCellType)
         view?.collectionView.dataSource = self
+        view?.collectionView.isSkeletonable = true
+
     }
 
     private func loadForecast(location: CLLocationCoordinate2D) {
+        view?.tableView.showAnimatedGradientSkeleton()
+        view?.collectionView.showAnimatedGradientSkeleton()
+
         provider.start(request: WeatherService.forecast(
             location: location),
             type: WeatherResponse.self)
@@ -71,7 +79,9 @@ final class HomePresenter: NSObject, PresenterProtocol {
         }.done { groupedModel in
             self.dataSource = groupedModel
             self.view?.tableView.reloadData()
+            self.view?.tableView.hideSkeleton()
             self.view?.collectionView.reloadData()
+            self.view?.collectionView.hideSkeleton()
             self.view?.tableView.selectRow(at: IndexPath(item: .zero, section: .zero),
                                            animated: false,
                                            scrollPosition: .top)
@@ -172,7 +182,9 @@ extension HomePresenter: UICollectionViewDataSource {
         
         let item = dataSource[selectedDayIndex][indexPath.row]
         
-        cell.configure(hour: hour(for: item), temperature: Int(round(item.main.temp)), image: UIImage())
+        cell.configure(hour: hour(for: item),
+                       temperature: Int(round(item.main.temp)),
+                       imageName: item.weather.first?.icon ?? "")
 
         return cell
     }
@@ -199,15 +211,56 @@ extension HomePresenter: UITableViewDataSource, UITableViewDelegate {
             .compactMap { $0.main.tempMax }
             .max() ?? .zero
         
+        let imageName = item.first?.weather.first?.icon ?? ""
+        
         cell.configure(day: day,
                        tempMin: Int(round(tempMin)),
                        tempMax: Int(round(tempMax)),
-                       image: UIImage())
+                       imageName: imageName)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         view?.collectionView.reloadData()
+    }
+}
+
+// MARK: - Skeleton
+
+extension HomePresenter: SkeletonTableViewDataSource {
+    func numSections(in collectionSkeletonView: UITableView) -> Int {
+        1
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        3
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        String(describing: Constants.tableCellType)
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, skeletonCellForRowAt indexPath: IndexPath) -> UITableViewCell? {
+        skeletonView.dequeueReusableCell(class: Constants.tableCellType, for: indexPath) ?? UITableViewCell()
+    }
+}
+
+extension HomePresenter: SkeletonCollectionViewDataSource {
+    
+    func numSections(in collectionSkeletonView: UICollectionView) -> Int {
+        1
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        4
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        String(describing: Constants.collectionCellType)
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView, skeletonCellForItemAt indexPath: IndexPath) -> UICollectionViewCell? {
+        skeletonView.dequeueReusableCell(class: Constants.collectionCellType, for: indexPath) ?? UICollectionViewCell()
     }
 }

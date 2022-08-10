@@ -24,6 +24,7 @@
 		05D0E2AF28A3E65B00C08782 /* CityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0E2AE28A3E65B00C08782 /* CityCell.swift */; };
 		05D0E2B128A3F2C500C08782 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0E2B028A3F2C500C08782 /* LocationManager.swift */; };
 		05D0E2B328A3F3B000C08782 /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0E2B228A3F3B000C08782 /* UIAlertController+Extension.swift */; };
+		05D0E2B628A4080000C08782 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 05D0E2B528A4080000C08782 /* SkeletonView */; };
 		05EAE1D328A1909E00B09E25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EAE1D228A1909E00B09E25 /* AppDelegate.swift */; };
 		05EAE1D528A1909E00B09E25 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EAE1D428A1909E00B09E25 /* SceneDelegate.swift */; };
 		05EAE1DA28A1909E00B09E25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05EAE1D828A1909E00B09E25 /* Main.storyboard */; };
@@ -102,6 +103,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				05EAE21C28A1B0E300B09E25 /* PMKFoundation in Frameworks */,
+				05D0E2B628A4080000C08782 /* SkeletonView in Frameworks */,
 				05EAE21928A1A98C00B09E25 /* PromiseKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,6 +322,7 @@
 			packageProductDependencies = (
 				05EAE21828A1A98C00B09E25 /* PromiseKit */,
 				05EAE21B28A1B0E300B09E25 /* PMKFoundation */,
+				05D0E2B528A4080000C08782 /* SkeletonView */,
 			);
 			productName = weatherApp;
 			productReference = 05EAE1CF28A1909E00B09E25 /* weatherApp.app */;
@@ -352,6 +355,7 @@
 			packageReferences = (
 				05EAE21728A1A98C00B09E25 /* XCRemoteSwiftPackageReference "PromiseKit" */,
 				05EAE21A28A1B0E300B09E25 /* XCRemoteSwiftPackageReference "Foundation" */,
+				05D0E2B428A4080000C08782 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			productRefGroup = 05EAE1D028A1909E00B09E25 /* Products */;
 			projectDirPath = "";
@@ -636,6 +640,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		05D0E2B428A4080000C08782 /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		05EAE21728A1A98C00B09E25 /* XCRemoteSwiftPackageReference "PromiseKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mxcl/PromiseKit";
@@ -655,6 +667,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		05D0E2B528A4080000C08782 /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 05D0E2B428A4080000C08782 /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
+		};
 		05EAE21828A1A98C00B09E25 /* PromiseKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 05EAE21728A1A98C00B09E25 /* XCRemoteSwiftPackageReference "PromiseKit" */;

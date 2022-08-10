@@ -13,9 +13,14 @@ final class WeatherCollectionCell: UICollectionViewCell {
     @IBOutlet private weak var temperatureLabel: UILabel!
     @IBOutlet private weak var weatherImageView: UIImageView!
     
-    func configure(hour: String, temperature: Int, image: UIImage) {
+    private let provider = ServiceProvider()
+    
+    func configure(hour: String, temperature: Int, imageName: String) {
         self.hourLabel.text = hour
         self.temperatureLabel.text = "\(temperature)º"
-        self.weatherImageView.image = image
+        provider.loadImage(imageName)
+            .done { data in
+                self.weatherImageView.image = UIImage(data: data)
+            }.cauterize()
     }
 }

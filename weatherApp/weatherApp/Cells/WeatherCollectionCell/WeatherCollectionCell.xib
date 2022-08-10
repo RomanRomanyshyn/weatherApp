@@ -10,49 +10,74 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WeatherCollectionCell" id="gTV-IL-0wX" customClass="WeatherCollectionCell" customModule="weatherApp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="140" height="182"/>
+            <rect key="frame" x="0.0" y="0.0" width="81" height="183"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="140" height="182"/>
+                <rect key="frame" x="0.0" y="0.0" width="81" height="183"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ae-gf-MFG">
-                        <rect key="frame" x="8" y="16" width="124" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" text="LabelLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ae-gf-MFG">
+                        <rect key="frame" x="8" y="16" width="65" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Guv-Kt-JlV">
-                        <rect key="frame" x="8" y="137" width="124" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LabelLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Guv-Kt-JlV">
+                        <rect key="frame" x="8" y="133.5" width="65" height="25.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wcf-ck-Hvv">
-                        <rect key="frame" x="16" y="61" width="108" height="68"/>
+                        <rect key="frame" x="8" y="60.5" width="65" height="65"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="9db-Fv-npY"/>
+                            <constraint firstAttribute="height" constant="65" id="B17-ao-FQe"/>
+                            <constraint firstAttribute="width" secondItem="Wcf-ck-Hvv" secondAttribute="height" id="C4o-ZF-VEg"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="9db-Fv-npY"/>
+                            </mask>
+                        </variation>
                     </imageView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="Wcf-ck-Hvv" secondAttribute="trailing" constant="16" id="6sT-py-poU"/>
+                <constraint firstAttribute="trailing" secondItem="Wcf-ck-Hvv" secondAttribute="trailing" constant="8" id="6sT-py-poU"/>
                 <constraint firstItem="Wcf-ck-Hvv" firstAttribute="top" secondItem="3ae-gf-MFG" secondAttribute="bottom" constant="24" id="7fx-of-ksW"/>
+                <constraint firstItem="Guv-Kt-JlV" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="DV6-iy-d14"/>
                 <constraint firstAttribute="trailing" secondItem="Guv-Kt-JlV" secondAttribute="trailing" constant="8" id="EKG-VG-5hR"/>
                 <constraint firstItem="Guv-Kt-JlV" firstAttribute="top" secondItem="Wcf-ck-Hvv" secondAttribute="bottom" constant="8" id="MRl-N2-L3V"/>
+                <constraint firstItem="3ae-gf-MFG" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Oeb-vx-oEd"/>
                 <constraint firstItem="3ae-gf-MFG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="16" id="dbO-Fj-3X1"/>
                 <constraint firstItem="3ae-gf-MFG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="ew0-Nq-8EK"/>
+                <constraint firstItem="Wcf-ck-Hvv" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="nOK-5c-S7y"/>
                 <constraint firstAttribute="bottom" secondItem="Guv-Kt-JlV" secondAttribute="bottom" constant="24" id="oih-PC-dXe"/>
                 <constraint firstAttribute="trailing" secondItem="3ae-gf-MFG" secondAttribute="trailing" constant="8" id="pQA-3G-ohp"/>
                 <constraint firstItem="Guv-Kt-JlV" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="usU-Tb-MYs"/>
-                <constraint firstItem="Wcf-ck-Hvv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="vE4-uh-FPP"/>
+                <constraint firstItem="Wcf-ck-Hvv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="vE4-uh-FPP"/>
             </constraints>
-            <size key="customSize" width="140" height="182"/>
+            <size key="customSize" width="81" height="183"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="hourLabel" destination="3ae-gf-MFG" id="zRk-pq-1zY"/>
                 <outlet property="temperatureLabel" destination="Guv-Kt-JlV" id="9Vg-tN-gLH"/>
                 <outlet property="weatherImageView" destination="Wcf-ck-Hvv" id="zbD-1h-Pim"/>
             </connections>
-            <point key="canvasLocation" x="202.89855072463769" y="145.98214285714286"/>
+            <point key="canvasLocation" x="163.04347826086959" y="157.70089285714286"/>
         </collectionViewCell>
     </objects>
 </document>

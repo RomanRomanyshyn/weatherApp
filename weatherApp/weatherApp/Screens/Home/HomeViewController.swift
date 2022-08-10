@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 final class HomeViewController: UIViewController, ViewProtocol {
     
@@ -27,6 +28,8 @@ final class HomeViewController: UIViewController, ViewProtocol {
     
     private var contentSizeObserver: NSKeyValueObservation?
     private let actionSheet = UIAlertController()
+    
+    private var skeletonables: [UIView] { [mainImageView, temperatureLabel, humidityLabel, windLabel] }
 
     // MARK: - Lifecycle
     
@@ -36,10 +39,20 @@ final class HomeViewController: UIViewController, ViewProtocol {
         setDynamicHeightForTableView()
         configureActionSheet()
         configureNavButton()
+        showSkeletons()
+        
         presenter?.onViewDidLoad()
     }
     
     // MARK: - Private
+    
+    private func showSkeletons() {
+        skeletonables.forEach { view in
+            view.isSkeletonable = true
+            view.showAnimatedGradientSkeleton()
+            view.updateSkeleton(usingColor: UIColor(named: "secondaryBlue") ?? .blue)
+        }
+    }
     
     private func setDynamicHeightForTableView() {
         contentSizeObserver = observe(\.tableView.contentSize, options: .new) {[weak self] _, change in
@@ -87,9 +100,15 @@ extension HomeViewController: HomeViewProtocol {
         temperatureLabel.text = temp
         humidityLabel.text = humidity
         windLabel.text = wind
+        
+        temperatureLabel.hideSkeleton()
+        humidityLabel.hideSkeleton()
+        windLabel.hideSkeleton()
     }
     
     func setMainImage(_ image: UIImage?) {
         mainImageView.image = image
+        
+        mainImageView.hideSkeleton()
     }
 }
