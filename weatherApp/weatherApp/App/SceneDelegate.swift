@@ -17,6 +17,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.window = UIWindow(windowScene: windowScene)
         
+        if #available(iOS 13.0, *) {
+            window?.overrideUserInterfaceStyle = .light
+        }
+        
         if let window = window {
             let appCoordinator = Coordinator(window: window)
 
@@ -25,24 +29,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
 }
-
-//class AppDelegate: UIResponder, UIApplicationDelegate {
-//
-//    var window: UIWindow?
-//    var coordinator: AppCoordinator?
-//
-//    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//
-//        let navigation = UINavigationController()
-//        self.window = UIWindow(frame: UIScreen.main.bounds)
-//
-//        if let window = window {
-//            let appCoordinator = AppCoordinator(with: AppCoordinator.Config(navigation, window))
-//
-//            coordinator = appCoordinator
-//            appCoordinator.start()
-//        }
-//        return true
-//    }
-//}
-
