@@ -19,8 +19,8 @@ final class WeatherTableCell: UITableViewCell {
         self.dayLabel.text = day
         self.temperatureLabel.text = "\(tempMax)º \\ \(tempMin)º"
         provider.loadImage(imageName)
-            .done { data in
-                self.weatherImageView.image = UIImage(data: data)
+            .done { image in
+                self.weatherImageView.image = image
             }.cauterize()
     }
 }

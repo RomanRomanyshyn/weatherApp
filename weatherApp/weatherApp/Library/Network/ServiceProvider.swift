@@ -5,12 +5,14 @@
 //  Created by Roman Romanyshyn on 08.08.2022.
 //
 
-import Foundation
+import UIKit
 import PromiseKit
 import PMKFoundation
 
 enum NetworkError: Error {
     case withStatusCode(_ statusCode: Int)
+    case cannotConvertToImage
+    case wrongURL
     case unknown
 }
 
@@ -89,10 +91,45 @@ extension ServiceProvider {
         }
     }
     
-    func loadImage(_ name: String) -> Promise<Data> {
-        guard let url = URL(string: "http://openweathermap.org/img/wn/\(name)@4x.png") else {
-            return Promise { $0.reject(NetworkError.unknown)}
+    func loadImage(_ name: String) -> Promise<UIImage> {
+        Promise { seal in
+            firstly {
+                stringUrl(for: name)
+            }.then { stringUrl in
+                self.validateURL(stringUrl: stringUrl)
+            }.then { url in
+                self.loadImage(url)
+            }.then { data in
+                self.decode(data: data)
+            }.done { image in
+                seal.fulfill(image)
+            }.catch { error in
+                seal.reject(error)
+            }
         }
-        return loadImage(url)
+    }
+    
+    private func stringUrl(for imageName: String) -> Guarantee<String> {
+        Guarantee { $0("http://openweathermap.org/img/wn/\(imageName)@4x.png") }
+    }
+    
+    private func validateURL(stringUrl: String) -> Promise<URL> {
+        Promise {
+            if let url = URL(string: stringUrl) {
+                $0.fulfill(url)
+            } else {
+                $0.reject(NetworkError.wrongURL)
+            }
+        }
+    }
+    
+    private func decode(data: Data) -> Promise<UIImage> {
+        Promise {
+            if let image = UIImage(data: data) {
+                $0.fulfill(image)
+            } else {
+                $0.reject(NetworkError.cannotConvertToImage)
+            }
+        }
     }
 }

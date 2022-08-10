@@ -10,19 +10,27 @@ import PromiseKit
 
 final class PlistManager<T: Codable> {
     
+    // MARK: - Errors
+    
     enum PlistError: Error {
         case noPath
         case wrongPath
     }
     
+    // MARK: - Properties
+    
     private let type: T.Type
     private let filePath: URL?
     private let queue = DispatchQueue(label: "weather_plist_queue", qos: .userInitiated)
+    
+    // MARK: - Init
     
     init(_ type: T.Type, fileURL: URL?) {
         self.type = type
         self.filePath = fileURL
     }
+    
+    // MARK: - Public
     
     func save(_ item: T) -> Promise<Void> {
         Promise { seal in
@@ -53,6 +61,8 @@ final class PlistManager<T: Codable> {
             }
         }
     }
+    
+    // MARK: - Private
     
     private func save(_ item: T, filepath: URL) -> Promise<Void> {
         Promise { seal in

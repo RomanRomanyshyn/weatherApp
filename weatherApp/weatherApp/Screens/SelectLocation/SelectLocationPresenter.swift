@@ -29,10 +29,7 @@ final class SelectLocationPresenter: PresenterProtocol {
     private var location: CLLocationCoordinate2D? {
         didSet {
             guard let location = location else { return }
-            let region = MKCoordinateRegion(center: location,
-                                            span: MKCoordinateSpan(latitudeDelta: Constants.spanDelta,
-                                                                   longitudeDelta: Constants.spanDelta))
-            self.view?.set(region: region)
+            updateUI(with: location)
         }
     }
     
@@ -56,7 +53,10 @@ final class SelectLocationPresenter: PresenterProtocol {
         locationManager.checkLocationService()
         observeNotification()
         
-        notificationCenter.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
+        notificationCenter.addObserver(forName: UIApplication.willEnterForegroundNotification,
+                                       object: nil,
+                                       queue: .main) {
+            [weak self] _ in
             if self?.location == nil {
                 self?.locationManager.checkLocationService()
             }
@@ -66,19 +66,29 @@ final class SelectLocationPresenter: PresenterProtocol {
     private func observeNotification() {
         notificationCenter.addObserver(forName: .sharedLocation,
                                        object: nil,
-                                       queue: .main) { [weak self] notification in
+                                       queue: .main) {
+            [weak self] notification in
+            guard let self = self else { return }
             guard let result = notification.object as? LocationResult  else { return }
             
             switch result {
             case .failure:
-                self?.location = nil
-                self?.view?.present(alert: UIAlertController.locationErrorVC)
+                self.location = nil
+                self.view?.present(alert: UIAlertController.locationErrorVC)
             case .success(let cLLocation):
-                if self?.location == nil {
-                    self?.location = cLLocation.coordinate
+                if self.location == nil {
+                    self.location = cLLocation.coordinate
                 }
             }
         }
+    }
+    
+    private func updateUI(with location: CLLocationCoordinate2D) {
+        let span = MKCoordinateSpan(latitudeDelta: Constants.spanDelta,
+                                    longitudeDelta: Constants.spanDelta)
+        let region = MKCoordinateRegion(center: location,
+                                        span: span)
+        self.view?.set(region: region)
     }
     
     // MARK: - Public
@@ -94,9 +104,5 @@ extension SelectLocationPresenter: SelectLocationPresenterProtocol {
     func showWeather(for location: CLLocationCoordinate2D) {
         delegate?.update(with: location)
         coordinator?.goBack()
-    }
-    
-    func doneButtonDidTap() {
-        
     }
 }

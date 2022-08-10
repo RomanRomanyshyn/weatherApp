@@ -8,11 +8,11 @@
 import UIKit
 import PromiseKit
 
-public final class ImageManager {
+final class ImageManager {
     
     // MARK: - Errors
     
-    public enum ImageError: Error {
+    enum ImageError: Error {
         case noPath
         case noImage
         case wrongUrl
@@ -40,11 +40,11 @@ public final class ImageManager {
     
     // MARK: - Init
     
-    public init() {}
+    init() {}
     
     // MARK: - Public
     
-    public func image(for stringUrl: String) -> Promise<UIImage> {
+    func image(for stringUrl: String) -> Promise<UIImage> {
         Promise { seal in
             firstly {
                 validateURL(stringUrl)

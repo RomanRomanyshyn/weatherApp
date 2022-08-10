@@ -10,14 +10,17 @@ import SkeletonView
 
 final class HomeViewController: UIViewController, ViewProtocol {
     
+    // MARK: - IBOutlets
+    
     @IBOutlet private weak var mainImageView: UIImageView!
     @IBOutlet private weak var temperatureLabel: UILabel!
     @IBOutlet private weak var humidityLabel: UILabel!
     @IBOutlet private weak var windLabel: UILabel!
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet private weak var tableHeight: NSLayoutConstraint!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     // MARK: - Typealiases
     
     typealias Presenter = HomePresenterProtocol
@@ -29,7 +32,24 @@ final class HomeViewController: UIViewController, ViewProtocol {
     private var contentSizeObserver: NSKeyValueObservation?
     private let actionSheet = UIAlertController()
     
-    private var skeletonables: [UIView] { [mainImageView, temperatureLabel, humidityLabel, windLabel] }
+    private var skeletonables: [UIView] { [
+        mainImageView,
+        temperatureLabel,
+        humidityLabel,
+        windLabel
+    ] }
+    
+    // MARK: - Constants
+    
+    private enum Constants {
+        static let skeletonColor = UIColor(named: "secondaryBlue") ?? .blue
+        
+        enum ActionSheet {
+            static let map = "Map"
+            static let searchList = "Search list"
+            static let cancel = "Cancel"
+        }
+    }
 
     // MARK: - Lifecycle
     
@@ -37,8 +57,8 @@ final class HomeViewController: UIViewController, ViewProtocol {
         super.viewDidLoad()
         
         setDynamicHeightForTableView()
+        configureNaviagationButton()
         configureActionSheet()
-        configureNavButton()
         showSkeletons()
         
         presenter?.onViewDidLoad()
@@ -50,37 +70,40 @@ final class HomeViewController: UIViewController, ViewProtocol {
         skeletonables.forEach { view in
             view.isSkeletonable = true
             view.showAnimatedGradientSkeleton()
-            view.updateSkeleton(usingColor: UIColor(named: "secondaryBlue") ?? .blue)
+            view.updateSkeleton(usingColor: Constants.skeletonColor)
         }
     }
     
     private func setDynamicHeightForTableView() {
         contentSizeObserver = observe(\.tableView.contentSize, options: .new) {[weak self] _, change in
-            guard let value = change.newValue else { return }
-            self?.tableHeight.constant = value.height
-            self?.tableView.isScrollEnabled = false
-            self?.view.layoutIfNeeded()
+            guard let self = self,
+                  let value = change.newValue else { return }
+            self.tableHeight.constant = value.height
+            self.tableView.isScrollEnabled = false
+            self.view.layoutIfNeeded()
         }
     }
     
     private func configureActionSheet() {
-        
-        let mapAction = UIAlertAction(title: "Map", style: .default) { [weak self] _ in
+        let mapAction = UIAlertAction(title: Constants.ActionSheet.map,
+                                      style: .default) { [weak self] _ in
             self?.presenter?.map()
         }
         
-        let searchListAction = UIAlertAction(title: "search list", style: .default) { [weak self] _ in
+        let searchListAction = UIAlertAction(title: Constants.ActionSheet.searchList,
+                                             style: .default) { [weak self] _ in
             self?.presenter?.searchList()
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: Constants.ActionSheet.cancel,
+                                         style: .cancel)
         
         actionSheet.addAction(mapAction)
         actionSheet.addAction(searchListAction)
         actionSheet.addAction(cancelAction)
     }
     
-    private func configureNavButton() {
+    private func configureNaviagationButton() {
         let item = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonDidTap))
         navigationItem.rightBarButtonItem = item
     }
@@ -99,17 +122,17 @@ extension HomeViewController: HomeViewProtocol {
     
     func setMainInfo(temp: String, humidity: String, wind: String) {
         temperatureLabel.text = temp
-        humidityLabel.text = humidity
-        windLabel.text = wind
-        
         temperatureLabel.hideSkeleton()
+
+        humidityLabel.text = humidity
         humidityLabel.hideSkeleton()
+
+        windLabel.text = wind
         windLabel.hideSkeleton()
     }
     
     func setMainImage(_ image: UIImage?) {
         mainImageView.image = image
-        
         mainImageView.hideSkeleton()
     }
 }

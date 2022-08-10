@@ -19,7 +19,7 @@ extension FileManager {
         return String(timeInterval)
     }
     
-    public func savedDataFromFile(_ path: URL) -> Promise<Data> {
+    func savedDataFromFile(_ path: URL) -> Promise<Data> {
         Promise { seal in
             do {
                 let imageData = try Data(contentsOf: path)
@@ -30,7 +30,7 @@ extension FileManager {
         }
     }
     
-    public func saveDataToFile(_ data: Data) -> Promise<URL> {
+    func saveDataToFile(_ data: Data) -> Promise<URL> {
         Promise { seal in
             guard let filePath = uniqueFilePath() else {
                 seal.reject(FileManagerError.cannotCreateFilePath)

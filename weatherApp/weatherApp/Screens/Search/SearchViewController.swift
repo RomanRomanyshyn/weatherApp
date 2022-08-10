@@ -35,6 +35,7 @@ final class SearchViewController: UIViewController, ViewProtocol {
         
         addSearchBar()
         configureTableView()
+        configureBackButton()
         addObserverForKeyboard()
         
         presenter?.onViewDidLoad()
@@ -46,23 +47,21 @@ final class SearchViewController: UIViewController, ViewProtocol {
         let searchBar = UISearchBar()
         searchBar.keyboardType = UIKeyboardType.asciiCapable
         searchBar.placeholder = Constants.placeholder
-        searchBar.searchTextField.leftViewMode = .always
-        searchBar.searchTextField.leftView = leftView()
         searchBar.searchBarStyle = .prominent
         searchBar.returnKeyType = .done
         searchBar.enablesReturnKeyAutomatically = false
         searchBar.delegate = self
+        searchBar.searchTextField.backgroundColor = .white
+        searchBar.searchTextField.tintColor = .black
         navigationItem.titleView = searchBar
-        navigationItem.setHidesBackButton(true, animated: false)
     }
     
-    private func leftView() -> UIView {
-        let image = Constants.leftImage
-        let view = UIImageView(image: image)
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(leftButtonDidTap))
-        view.addGestureRecognizer(recognizer)
-        view.isUserInteractionEnabled = true
-        return view
+    private func configureBackButton() {
+        navigationItem.setHidesBackButton(true, animated: false)
+        let button = UIBarButtonItem(image: Constants.leftImage,
+                                     style: .plain,
+                                     target: self, action: #selector(leftButtonDidTap))
+        navigationItem.leftBarButtonItem = button
     }
     
     @objc private func leftButtonDidTap() {

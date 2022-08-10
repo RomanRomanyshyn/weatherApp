@@ -14,7 +14,7 @@ struct WeatherResponse: Codable {
     let city: WeatherCity
 }
 
-// MARK: - City
+// MARK: - WeatherCity
 
 struct WeatherCity: Codable {
     let id: Int
@@ -51,8 +51,8 @@ struct WeatherItem: Codable {
         case wind, main, weather
     }
 }
-//
-// MARK: - MainClass
+
+// MARK: - MainForecastInfo
 
 struct MainForecastInfo: Codable {
     let temp, feelsLike, tempMin, tempMax: Double

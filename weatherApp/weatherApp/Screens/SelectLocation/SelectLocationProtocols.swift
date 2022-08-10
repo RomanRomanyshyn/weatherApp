@@ -15,7 +15,6 @@ protocol SelectLocationViewProtocol: AnyObject {
 }
 
 protocol SelectLocationPresenterProtocol: BasePresenterProtocol {
-    func doneButtonDidTap()
     func showWeather(for location: CLLocationCoordinate2D)
 }
 

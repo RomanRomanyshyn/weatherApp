@@ -19,8 +19,8 @@ final class WeatherCollectionCell: UICollectionViewCell {
         self.hourLabel.text = hour
         self.temperatureLabel.text = "\(temperature)º"
         provider.loadImage(imageName)
-            .done { data in
-                self.weatherImageView.image = UIImage(data: data)
+            .done { image in
+                self.weatherImageView.image = image
             }.cauterize()
     }
 }

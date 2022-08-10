@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0507667F28A451CD0007CC50 /* IndexPath+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0507667E28A451CD0007CC50 /* IndexPath+Extension.swift */; };
 		0549AE3A28A27413002974EA /* WeatherCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0549AE3828A27413002974EA /* WeatherCollectionCell.swift */; };
 		0549AE3B28A27413002974EA /* WeatherCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0549AE3928A27413002974EA /* WeatherCollectionCell.xib */; };
 		0549AE3E28A28933002974EA /* Collection+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0549AE3D28A28933002974EA /* Collection+Extenstion.swift */; };
@@ -53,6 +54,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0507667E28A451CD0007CC50 /* IndexPath+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IndexPath+Extension.swift"; sourceTree = "<group>"; };
 		0549AE3828A27413002974EA /* WeatherCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCollectionCell.swift; sourceTree = "<group>"; };
 		0549AE3928A27413002974EA /* WeatherCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherCollectionCell.xib; sourceTree = "<group>"; };
 		0549AE3D28A28933002974EA /* Collection+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extenstion.swift"; sourceTree = "<group>"; };
@@ -222,7 +224,6 @@
 				05EAE1E728A191E800B09E25 /* App */,
 				05EAE1E628A191D300B09E25 /* Resources */,
 				05EAE1F628A19AD900B09E25 /* Library */,
-				0549AE4328A3DC5E002974EA /* Helpers */,
 				0549AE4428A3DC6B002974EA /* Cells */,
 				0549AE4128A3DC33002974EA /* Model */,
 				05D0E29628A3DD6300C08782 /* Screens */,
@@ -266,6 +267,7 @@
 				05EAE1F528A19AD000B09E25 /* MVP */,
 				05EAE1F928A19B6700B09E25 /* Extensions */,
 				05EAE21228A1A0DC00B09E25 /* Network */,
+				0549AE4328A3DC5E002974EA /* Helpers */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -278,6 +280,7 @@
 				05EAE1FE28A19C1D00B09E25 /* UICollectionView+Extension.swift */,
 				05D0E2B228A3F3B000C08782 /* UIAlertController+Extension.swift */,
 				05EAE22528A25C8900B09E25 /* FileManager+Extension.swift */,
+				0507667E28A451CD0007CC50 /* IndexPath+Extension.swift */,
 				0549AE3D28A28933002974EA /* Collection+Extenstion.swift */,
 				05EAE1FC28A19BEB00B09E25 /* UIViewController+Extension.swift */,
 			);
@@ -415,6 +418,7 @@
 				0549AE3E28A28933002974EA /* Collection+Extenstion.swift in Sources */,
 				05EAE22628A25C8900B09E25 /* FileManager+Extension.swift in Sources */,
 				05D0E2AB28A3DD6400C08782 /* SelectLocationPresenter.swift in Sources */,
+				0507667F28A451CD0007CC50 /* IndexPath+Extension.swift in Sources */,
 				05D0E2A828A3DD6400C08782 /* SearchProtocols.swift in Sources */,
 				05EAE22B28A2715200B09E25 /* WeatherTableCell.swift in Sources */,
 				05EAE1F828A19B5800B09E25 /* UIStoryboard+Extension.swift in Sources */,

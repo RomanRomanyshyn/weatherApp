@@ -22,6 +22,6 @@ protocol HomePresenterProtocol: BasePresenterProtocol {
 }
 
 protocol HomeCoordinatorProtocol: AbstractCoordinatorProtocol {
-    func map(delegate: SearchWeatherHandler)
-    func searchList(delegate: SearchWeatherHandler)
+    func map(handler: SearchWeatherHandler)
+    func searchList(handler: SearchWeatherHandler)
 }

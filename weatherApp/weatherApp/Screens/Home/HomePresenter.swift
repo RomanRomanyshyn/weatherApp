@@ -67,31 +67,23 @@ final class HomePresenter: NSObject, PresenterProtocol {
         view?.tableView.showAnimatedGradientSkeleton()
         view?.collectionView.showAnimatedGradientSkeleton()
 
-        provider.start(request: WeatherService.forecast(
-            location: location),
-            type: WeatherResponse.self)
-        .then{ model in
-            self.updateMainView(model: model)
-        }.then { model in
-            self.setDay(for: model.list)
+        provider.start(request: WeatherService.forecast(location: location),
+                       type: WeatherResponse.self)
+        .get { result in
+            self.updateMainView(model: result)
+        }.then { result in
+            self.setDay(for: result.list)
         }.then { model in
             self.groupByDays(model)
         }.done { groupedModel in
-            self.dataSource = groupedModel
-            self.view?.tableView.reloadData()
-            self.view?.tableView.hideSkeleton()
-            self.view?.collectionView.reloadData()
-            self.view?.collectionView.hideSkeleton()
-            self.view?.tableView.selectRow(at: IndexPath(item: .zero, section: .zero),
-                                           animated: false,
-                                           scrollPosition: .top)
+            self.set(dataSource: groupedModel)
         }.catch { error in
             print(error)
         }
     }
     
-    private func updateMainView(model: WeatherResponse) -> Promise<WeatherResponse> {
-        guard let weather = model.list.first else { return Promise { $0.fulfill(model) } }
+    private func updateMainView(model: WeatherResponse) {
+        guard let weather = model.list.first else { return }
 
         let tempMin = String(Int(round(weather.main.tempMin)))
         let tempMax = String(Int(round(weather.main.tempMax)))
@@ -102,17 +94,13 @@ final class HomePresenter: NSObject, PresenterProtocol {
         view?.setMainInfo(temp: temp, humidity: humidity, wind: wind)
         view?.set(title: model.city.name)
         provider.loadImage(weather.weather.first?.icon ?? "")
-            .done { data in
-                let image = UIImage(data: data)
+            .done { image in
                 self.view?.setMainImage(image)
-            }.catch { error in
-                print(error)
-            }
-        return Promise { $0.fulfill(model) }
+            }.cauterize()
     }
     
-    private func setDay(for items: [WeatherItem]) -> Promise<[WeatherItem]> {
-        Promise { seal in
+    private func setDay(for items: [WeatherItem]) -> Guarantee<[WeatherItem]> {
+        Guarantee { seal in
             let formatter = CustomDateFormatter.shared.date
             let modifiedItems: [WeatherItem] = items.compactMap {
                 var newItem = $0
@@ -121,23 +109,32 @@ final class HomePresenter: NSObject, PresenterProtocol {
                 return newItem
             }
             
-            seal.fulfill(modifiedItems)
+            seal(modifiedItems)
         }
+    }
+    
+    private func groupByDays(_ items: [WeatherItem]) -> Guarantee<[[WeatherItem]]> {
+        Guarantee {
+            let dictionary = Dictionary(grouping: items, by: { $0.time })
+                .sorted { $0.key < $1.key }
+
+            $0(dictionary.compactMap { $0.value })
+        }
+    }
+    
+    private func set(dataSource: [[WeatherItem]]) {
+        self.dataSource = dataSource
+        view?.tableView.reloadData()
+        view?.tableView.hideSkeleton()
+        view?.collectionView.reloadData()
+        view?.collectionView.hideSkeleton()
+        view?.tableView.selectRow(at: IndexPath.zero, animated: false, scrollPosition: .top)
     }
     
     private func hour(for item: WeatherItem) -> String {
         let formatter = CustomDateFormatter.shared.hour
         let date = Date(timeIntervalSince1970: TimeInterval(item.timestamp))
         return formatter.string(from: date)
-    }
-    
-    private func groupByDays(_ items: [WeatherItem]) -> Promise<[[WeatherItem]]> {
-        Promise {
-            let dictionary = Dictionary(grouping: items, by: { $0.time })
-                .sorted { $0.key < $1.key }
-
-            $0.fulfill(dictionary.compactMap { $0.value })
-        }
     }
     
     // MARK: - Public
@@ -154,13 +151,15 @@ final class HomePresenter: NSObject, PresenterProtocol {
 
 extension HomePresenter: HomePresenterProtocol {
     func map() {
-        coordinator?.map(delegate: self)
+        coordinator?.map(handler: self)
     }
     
     func searchList() {
-        coordinator?.searchList(delegate: self)
+        coordinator?.searchList(handler: self)
     }
 }
+
+// MARK: - SearchWeatherHandler
 
 extension HomePresenter: SearchWeatherHandler {
     func update(with coordinates: CLLocationCoordinate2D) {
@@ -229,38 +228,17 @@ extension HomePresenter: UITableViewDataSource, UITableViewDelegate {
 // MARK: - Skeleton
 
 extension HomePresenter: SkeletonTableViewDataSource {
-    func numSections(in collectionSkeletonView: UITableView) -> Int {
-        1
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
-    }
-    
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
         String(describing: Constants.tableCellType)
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UITableView, skeletonCellForRowAt indexPath: IndexPath) -> UITableViewCell? {
-        skeletonView.dequeueReusableCell(class: Constants.tableCellType, for: indexPath) ?? UITableViewCell()
     }
 }
 
 extension HomePresenter: SkeletonCollectionViewDataSource {
-    
-    func numSections(in collectionSkeletonView: UICollectionView) -> Int {
-        1
-    }
-    
     func collectionSkeletonView(_ skeletonView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        4
+        5
     }
     
     func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
         String(describing: Constants.collectionCellType)
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UICollectionView, skeletonCellForItemAt indexPath: IndexPath) -> UICollectionViewCell? {
-        skeletonView.dequeueReusableCell(class: Constants.collectionCellType, for: indexPath) ?? UICollectionViewCell()
     }
 }

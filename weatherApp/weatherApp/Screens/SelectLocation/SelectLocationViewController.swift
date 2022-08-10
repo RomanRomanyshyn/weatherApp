@@ -17,18 +17,17 @@ final class SelectLocationViewController: UIViewController, ViewProtocol {
     // MARK: - Properties
     
     var presenter: Presenter?
-    
-    private var button = UIBarButtonItem()
-    
+        
     private let mapView = MKMapView()
     private var selectedPoint: CLLocationCoordinate2D? {
-        didSet { button.isEnabled = selectedPoint != nil }
+        didSet { navigationItem.rightBarButtonItem?.isEnabled = selectedPoint != nil }
     }
     
     // MARK: - Constants
     
     private enum Constants {
         static let title = "Choose location"
+        static let annotationTitle = "Selected Point"
     }
     
     // MARK: - Lifecycle
@@ -43,6 +42,8 @@ final class SelectLocationViewController: UIViewController, ViewProtocol {
         
         presenter?.onViewDidLoad()
     }
+    
+    // MARK: - Private
     
     private func configureView() {
         title = Constants.title
@@ -64,7 +65,7 @@ final class SelectLocationViewController: UIViewController, ViewProtocol {
     }
     
     private func addDoneButton() {
-        button = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonDidTap))
+        let button = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonDidTap))
         button.isEnabled = false
         navigationItem.rightBarButtonItem = button
     }
@@ -80,11 +81,11 @@ final class SelectLocationViewController: UIViewController, ViewProtocol {
     }
     
     @objc func createNewAnnotation(_ sender: UIGestureRecognizer) {
-        let touchPoint = sender.location(in: self.mapView)
-        let coordinates = mapView.convert(touchPoint, toCoordinateFrom: self.mapView)
+        let touchPoint = sender.location(in: mapView)
+        let coordinates = mapView.convert(touchPoint, toCoordinateFrom: mapView)
         let selectedPoint = MKPointAnnotation()
         selectedPoint.coordinate = coordinates
-        selectedPoint.title = "Selected Point"
+        selectedPoint.title = Constants.annotationTitle
         mapView.removeAnnotations(mapView.annotations)
         mapView.addAnnotation(selectedPoint)
         self.selectedPoint = coordinates

@@ -104,6 +104,8 @@ extension SearchPresenter: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+// MARK: - SearchWeatherHandler
+
 protocol SearchWeatherHandler: AnyObject {
     func update(with coordinates: CLLocationCoordinate2D)
 }
