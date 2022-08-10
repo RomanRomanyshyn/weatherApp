@@ -58,6 +58,7 @@ final class HomeViewController: UIViewController, ViewProtocol {
         contentSizeObserver = observe(\.tableView.contentSize, options: .new) {[weak self] _, change in
             guard let value = change.newValue else { return }
             self?.tableHeight.constant = value.height
+            self?.tableView.isScrollEnabled = false
             self?.view.layoutIfNeeded()
         }
     }
