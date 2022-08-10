@@ -85,6 +85,7 @@ final class SelectLocationViewController: UIViewController, ViewProtocol {
         let selectedPoint = MKPointAnnotation()
         selectedPoint.coordinate = coordinates
         selectedPoint.title = "Selected Point"
+        mapView.removeAnnotations(mapView.annotations)
         mapView.addAnnotation(selectedPoint)
         self.selectedPoint = coordinates
     }
