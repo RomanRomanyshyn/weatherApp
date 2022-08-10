@@ -5,10 +5,18 @@
 //  Created by Roman Romanyshyn on 08.08.2022.
 //
 
-import Foundation
+import UIKit
+import MapKit
+import CoreLocation
 
-protocol SelectLocationViewProtocol: AnyObject {}
+protocol SelectLocationViewProtocol: AnyObject {
+    func set(region: MKCoordinateRegion)
+    func present(alert: UIAlertController)
+}
 
-protocol SelectLocationPresenterProtocol: BasePresenterProtocol {}
+protocol SelectLocationPresenterProtocol: BasePresenterProtocol {
+    func doneButtonDidTap()
+    func showWeather(for location: CLLocationCoordinate2D)
+}
 
 protocol SelectLocationCoordinatorProtocol: AbstractCoordinatorProtocol {}

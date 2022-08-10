@@ -22,6 +22,8 @@
 		05D0E2AB28A3DD6400C08782 /* SelectLocationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0E2A228A3DD6300C08782 /* SelectLocationPresenter.swift */; };
 		05D0E2AD28A3E26400C08782 /* CitiesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0E2AC28A3E26400C08782 /* CitiesResponse.swift */; };
 		05D0E2AF28A3E65B00C08782 /* CityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0E2AE28A3E65B00C08782 /* CityCell.swift */; };
+		05D0E2B128A3F2C500C08782 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0E2B028A3F2C500C08782 /* LocationManager.swift */; };
+		05D0E2B328A3F3B000C08782 /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0E2B228A3F3B000C08782 /* UIAlertController+Extension.swift */; };
 		05EAE1D328A1909E00B09E25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EAE1D228A1909E00B09E25 /* AppDelegate.swift */; };
 		05EAE1D528A1909E00B09E25 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EAE1D428A1909E00B09E25 /* SceneDelegate.swift */; };
 		05EAE1DA28A1909E00B09E25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05EAE1D828A1909E00B09E25 /* Main.storyboard */; };
@@ -65,6 +67,8 @@
 		05D0E2A228A3DD6300C08782 /* SelectLocationPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectLocationPresenter.swift; sourceTree = "<group>"; };
 		05D0E2AC28A3E26400C08782 /* CitiesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesResponse.swift; sourceTree = "<group>"; };
 		05D0E2AE28A3E65B00C08782 /* CityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCell.swift; sourceTree = "<group>"; };
+		05D0E2B028A3F2C500C08782 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		05D0E2B228A3F3B000C08782 /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
 		05EAE1CF28A1909E00B09E25 /* weatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05EAE1D228A1909E00B09E25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05EAE1D428A1909E00B09E25 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -137,6 +141,7 @@
 			children = (
 				05EAE1E828A199CF00B09E25 /* ControllerFactory.swift */,
 				05EAE21F28A2587500B09E25 /* ImageManager.swift */,
+				05D0E2B028A3F2C500C08782 /* LocationManager.swift */,
 				05EAE22328A25C3300B09E25 /* PlistManager.swift */,
 				0549AE3F28A29716002974EA /* CustomDateFormatter.swift */,
 			);
@@ -186,8 +191,8 @@
 		05D0E29F28A3DD6300C08782 /* SelectLocation */ = {
 			isa = PBXGroup;
 			children = (
-				05D0E2A028A3DD6300C08782 /* SelectLocationViewController.swift */,
 				05D0E2A128A3DD6300C08782 /* SelectLocationProtocols.swift */,
+				05D0E2A028A3DD6300C08782 /* SelectLocationViewController.swift */,
 				05D0E2A228A3DD6300C08782 /* SelectLocationPresenter.swift */,
 			);
 			path = SelectLocation;
@@ -269,6 +274,7 @@
 				05EAE1F728A19B5800B09E25 /* UIStoryboard+Extension.swift */,
 				05EAE1FA28A19BC000B09E25 /* UITableView+Extension.swift */,
 				05EAE1FE28A19C1D00B09E25 /* UICollectionView+Extension.swift */,
+				05D0E2B228A3F3B000C08782 /* UIAlertController+Extension.swift */,
 				05EAE22528A25C8900B09E25 /* FileManager+Extension.swift */,
 				0549AE3D28A28933002974EA /* Collection+Extenstion.swift */,
 				05EAE1FC28A19BEB00B09E25 /* UIViewController+Extension.swift */,
@@ -377,6 +383,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				05D0E2A928A3DD6400C08782 /* SelectLocationViewController.swift in Sources */,
+				05D0E2B328A3F3B000C08782 /* UIAlertController+Extension.swift in Sources */,
 				05EAE1FF28A19C1D00B09E25 /* UICollectionView+Extension.swift in Sources */,
 				05EAE1F228A19A9F00B09E25 /* PresenterProtocols.swift in Sources */,
 				05EAE22028A2587500B09E25 /* ImageManager.swift in Sources */,
@@ -394,6 +401,7 @@
 				0549AE3A28A27413002974EA /* WeatherCollectionCell.swift in Sources */,
 				05EAE1F428A19AC500B09E25 /* ViewProtocol.swift in Sources */,
 				05EAE1FB28A19BC000B09E25 /* UITableView+Extension.swift in Sources */,
+				05D0E2B128A3F2C500C08782 /* LocationManager.swift in Sources */,
 				05D0E2A428A3DD6400C08782 /* HomePresenter.swift in Sources */,
 				05D0E2A528A3DD6400C08782 /* HomeProtocols.swift in Sources */,
 				05EAE21128A1A0B200B09E25 /* ServiceProvider.swift in Sources */,

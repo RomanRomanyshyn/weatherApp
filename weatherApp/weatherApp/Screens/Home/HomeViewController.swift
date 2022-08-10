@@ -59,8 +59,11 @@ final class HomeViewController: UIViewController, ViewProtocol {
             self?.presenter?.searchList()
         }
         
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
         actionSheet.addAction(mapAction)
         actionSheet.addAction(searchListAction)
+        actionSheet.addAction(cancelAction)
     }
     
     private func configureNavButton() {

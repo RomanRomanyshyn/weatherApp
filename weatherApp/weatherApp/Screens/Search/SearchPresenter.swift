@@ -14,7 +14,7 @@ final class SearchPresenter: NSObject, PresenterProtocol {
     
     typealias View = SearchViewProtocol
     typealias Coordinator = SearchCoordinatorProtocol
-    typealias Parameters = SearchPresenterDelegate
+    typealias Parameters = SearchWeatherHandler
     
     // MARK: - Properties
     
@@ -23,7 +23,7 @@ final class SearchPresenter: NSObject, PresenterProtocol {
     
     private let provider = ServiceProvider()
     private var dataSource = [SearchedCity]()
-    private weak var delegate: SearchPresenterDelegate?
+    private weak var delegate: SearchWeatherHandler?
     
     // MARK: - Constants
     
@@ -33,7 +33,7 @@ final class SearchPresenter: NSObject, PresenterProtocol {
     
     // MARK: - Init
     
-    init(parameters: SearchPresenterDelegate, view: View, coordinator: Coordinator) {
+    init(parameters: SearchWeatherHandler, view: View, coordinator: Coordinator) {
         self.view = view
         self.coordinator = coordinator
         self.delegate = parameters
@@ -104,6 +104,6 @@ extension SearchPresenter: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-protocol SearchPresenterDelegate: AnyObject {
+protocol SearchWeatherHandler: AnyObject {
     func update(with coordinates: CLLocationCoordinate2D)
 }

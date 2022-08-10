@@ -49,6 +49,8 @@ final class SearchViewController: UIViewController, ViewProtocol {
         searchBar.searchTextField.leftViewMode = .always
         searchBar.searchTextField.leftView = leftView()
         searchBar.searchBarStyle = .prominent
+        searchBar.returnKeyType = .done
+        searchBar.enablesReturnKeyAutomatically = false
         searchBar.delegate = self
         navigationItem.titleView = searchBar
         navigationItem.setHidesBackButton(true, animated: false)
@@ -118,5 +120,9 @@ extension SearchViewController: SearchViewProtocol {}
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         presenter?.search(searchText)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }

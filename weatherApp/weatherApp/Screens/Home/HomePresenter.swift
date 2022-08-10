@@ -144,7 +144,7 @@ final class HomePresenter: NSObject, PresenterProtocol {
 
 extension HomePresenter: HomePresenterProtocol {
     func map() {
-        coordinator?.map()
+        coordinator?.map(delegate: self)
     }
     
     func searchList() {
@@ -152,7 +152,7 @@ extension HomePresenter: HomePresenterProtocol {
     }
 }
 
-extension HomePresenter: SearchPresenterDelegate {
+extension HomePresenter: SearchWeatherHandler {
     func update(with coordinates: CLLocationCoordinate2D) {
         loadForecast(location: coordinates)
     }

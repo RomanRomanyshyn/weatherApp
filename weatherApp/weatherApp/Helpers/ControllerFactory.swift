@@ -17,15 +17,15 @@ final class ControllerFactory {
         return view
     }
     
-    static func selectLocation(coordinator: SelectLocationCoordinatorProtocol) -> SelectLocationViewController {
+    static func selectLocation(coordinator: SelectLocationCoordinatorProtocol, delegate: SearchWeatherHandler) -> SelectLocationViewController {
         let view = SelectLocationViewController()
-        let presenter = SelectLocationPresenter(parameters: (), view: view, coordinator: coordinator)
+        let presenter = SelectLocationPresenter(parameters: delegate, view: view, coordinator: coordinator)
         view.presenter = presenter
 
         return view
     }
 
-    static func search(coordinator: SearchCoordinatorProtocol, delegate: SearchPresenterDelegate) -> SearchViewController {
+    static func search(coordinator: SearchCoordinatorProtocol, delegate: SearchWeatherHandler) -> SearchViewController {
         let view = SearchViewController()
         let presenter = SearchPresenter(parameters: delegate, view: view, coordinator: coordinator)
         view.presenter = presenter

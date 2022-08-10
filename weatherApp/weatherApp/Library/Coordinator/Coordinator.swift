@@ -22,12 +22,12 @@ final class Coordinator: AbstractCoordinatorProtocol {
 }
 
 extension Coordinator: HomeCoordinatorProtocol {
-    func map() {
-        let controller = ControllerFactory.selectLocation(coordinator: self)
+    func map(delegate: SearchWeatherHandler) {
+        let controller = ControllerFactory.selectLocation(coordinator: self, delegate: delegate)
         push(controller: controller)
     }
     
-    func searchList(delegate: SearchPresenterDelegate) {
+    func searchList(delegate: SearchWeatherHandler) {
         let controller = ControllerFactory.search(coordinator: self, delegate: delegate)
         push(controller: controller)
     }
