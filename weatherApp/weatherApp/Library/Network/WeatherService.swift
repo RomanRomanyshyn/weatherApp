@@ -52,6 +52,4 @@ extension WeatherService: Service {
     var method: ServiceMethod {
         .get
     }
-    
-    
 }

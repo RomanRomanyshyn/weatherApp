@@ -34,6 +34,8 @@ final class HomePresenter: NSObject, PresenterProtocol {
     private enum Constants {
         static let tableCellType = WeatherTableCell.self
         static let collectionCellType = WeatherCollectionCell.self
+        static let lvivCoordinates = CLLocationCoordinate2D(latitude: 49.835070,
+                                                            longitude: 24.023791)
     }
     
     // MARK: - Init
@@ -56,10 +58,9 @@ final class HomePresenter: NSObject, PresenterProtocol {
         view?.collectionView.dataSource = self
     }
 
-    private func loadForecast() {
+    private func loadForecast(location: CLLocationCoordinate2D) {
         provider.start(request: WeatherService.forecast(
-            location: CLLocationCoordinate2D(latitude: 49.835070,
-                                             longitude: 24.023791)),
+            location: location),
             type: WeatherResponse.self)
         .then{ model in
             self.updateMainView(model: model)
@@ -135,7 +136,7 @@ final class HomePresenter: NSObject, PresenterProtocol {
         configureTableView()
         configureCollectionView()
         
-        loadForecast()
+        loadForecast(location: Constants.lvivCoordinates)
     }
 }
 
@@ -147,7 +148,13 @@ extension HomePresenter: HomePresenterProtocol {
     }
     
     func searchList() {
-        coordinator?.searchList()
+        coordinator?.searchList(delegate: self)
+    }
+}
+
+extension HomePresenter: SearchPresenterDelegate {
+    func update(with coordinates: CLLocationCoordinate2D) {
+        loadForecast(location: coordinates)
     }
 }
 

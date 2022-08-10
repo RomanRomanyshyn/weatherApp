@@ -25,9 +25,9 @@ final class ControllerFactory {
         return view
     }
 
-    static func search(coordinator: SearchCoordinatorProtocol) -> SearchViewController {
+    static func search(coordinator: SearchCoordinatorProtocol, delegate: SearchPresenterDelegate) -> SearchViewController {
         let view = SearchViewController()
-        let presenter = SearchPresenter(parameters: (), view: view, coordinator: coordinator)
+        let presenter = SearchPresenter(parameters: delegate, view: view, coordinator: coordinator)
         view.presenter = presenter
 
         return view

@@ -27,8 +27,8 @@ extension Coordinator: HomeCoordinatorProtocol {
         push(controller: controller)
     }
     
-    func searchList() {
-        let controller = ControllerFactory.search(coordinator: self)
+    func searchList(delegate: SearchPresenterDelegate) {
+        let controller = ControllerFactory.search(coordinator: self, delegate: delegate)
         push(controller: controller)
     }
 }

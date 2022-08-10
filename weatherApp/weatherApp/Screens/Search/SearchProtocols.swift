@@ -5,10 +5,15 @@
 //  Created by Roman Romanyshyn on 08.08.2022.
 //
 
-import Foundation
+import UIKit
 
-protocol SearchViewProtocol: AnyObject {}
+protocol SearchViewProtocol: AnyObject {
+    var tableView: UITableView { get }
+}
 
-protocol SearchPresenterProtocol: BasePresenterProtocol {}
+protocol SearchPresenterProtocol: BasePresenterProtocol {
+    func search(_ text: String)
+    func back()
+}
 
 protocol SearchCoordinatorProtocol: AbstractCoordinatorProtocol {}

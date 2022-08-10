@@ -20,6 +20,8 @@
 		05D0E2A928A3DD6400C08782 /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0E2A028A3DD6300C08782 /* SelectLocationViewController.swift */; };
 		05D0E2AA28A3DD6400C08782 /* SelectLocationProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0E2A128A3DD6300C08782 /* SelectLocationProtocols.swift */; };
 		05D0E2AB28A3DD6400C08782 /* SelectLocationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0E2A228A3DD6300C08782 /* SelectLocationPresenter.swift */; };
+		05D0E2AD28A3E26400C08782 /* CitiesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0E2AC28A3E26400C08782 /* CitiesResponse.swift */; };
+		05D0E2AF28A3E65B00C08782 /* CityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D0E2AE28A3E65B00C08782 /* CityCell.swift */; };
 		05EAE1D328A1909E00B09E25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EAE1D228A1909E00B09E25 /* AppDelegate.swift */; };
 		05EAE1D528A1909E00B09E25 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EAE1D428A1909E00B09E25 /* SceneDelegate.swift */; };
 		05EAE1DA28A1909E00B09E25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05EAE1D828A1909E00B09E25 /* Main.storyboard */; };
@@ -61,6 +63,8 @@
 		05D0E2A028A3DD6300C08782 /* SelectLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
 		05D0E2A128A3DD6300C08782 /* SelectLocationProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectLocationProtocols.swift; sourceTree = "<group>"; };
 		05D0E2A228A3DD6300C08782 /* SelectLocationPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectLocationPresenter.swift; sourceTree = "<group>"; };
+		05D0E2AC28A3E26400C08782 /* CitiesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesResponse.swift; sourceTree = "<group>"; };
+		05D0E2AE28A3E65B00C08782 /* CityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCell.swift; sourceTree = "<group>"; };
 		05EAE1CF28A1909E00B09E25 /* weatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05EAE1D228A1909E00B09E25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05EAE1D428A1909E00B09E25 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				05EAE22728A25FA000B09E25 /* WeatherResponse.swift */,
+				05D0E2AC28A3E26400C08782 /* CitiesResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -143,6 +148,7 @@
 			children = (
 				05EAE22D28A2715900B09E25 /* WeatherTableCell */,
 				0549AE3C28A27420002974EA /* WeatherCollectionCell */,
+				05D0E2AE28A3E65B00C08782 /* CityCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -170,9 +176,9 @@
 		05D0E29B28A3DD6300C08782 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				05D0E29E28A3DD6300C08782 /* SearchProtocols.swift */,
 				05D0E29C28A3DD6300C08782 /* SearchViewController.swift */,
 				05D0E29D28A3DD6300C08782 /* SearchPresenter.swift */,
-				05D0E29E28A3DD6300C08782 /* SearchProtocols.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -384,6 +390,7 @@
 				05EAE1E928A199CF00B09E25 /* ControllerFactory.swift in Sources */,
 				05EAE21628A1A36A00B09E25 /* AbstractCoordinator.swift in Sources */,
 				05EAE1D528A1909E00B09E25 /* SceneDelegate.swift in Sources */,
+				05D0E2AF28A3E65B00C08782 /* CityCell.swift in Sources */,
 				0549AE3A28A27413002974EA /* WeatherCollectionCell.swift in Sources */,
 				05EAE1F428A19AC500B09E25 /* ViewProtocol.swift in Sources */,
 				05EAE1FB28A19BC000B09E25 /* UITableView+Extension.swift in Sources */,
@@ -401,6 +408,7 @@
 				05EAE1F828A19B5800B09E25 /* UIStoryboard+Extension.swift in Sources */,
 				0549AE4028A29716002974EA /* CustomDateFormatter.swift in Sources */,
 				05EAE21428A1A26A00B09E25 /* Coordinator.swift in Sources */,
+				05D0E2AD28A3E26400C08782 /* CitiesResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

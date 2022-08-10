@@ -11,12 +11,12 @@ import Foundation
 
 struct WeatherResponse: Codable {
     let list: [WeatherItem]
-    let city: City
+    let city: WeatherCity
 }
 
 // MARK: - City
 
-struct City: Codable {
+struct WeatherCity: Codable {
     let id: Int
     let name: String
     let coordinates: Coordinates
